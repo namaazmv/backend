@@ -1,0 +1,17 @@
+[package]
+name = "salat-mv"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.3.0"
+chrono = "0.4.24"
+csv = "1.1.6"
+derive_more = "0.99.17"
+eyre = "0.6.8"
+fern = "0.6.1"
+log = "0.4.17"
+serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.91"
