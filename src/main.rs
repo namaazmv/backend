@@ -113,6 +113,7 @@ async fn main() -> eyre::Result<()> {
             .service(next)
             .app_data(web_data.clone())
             .wrap(Logger::default())
+            .wrap(actix_cors::Cors::permissive())
     })
     .bind(("127.0.0.1", 2347))?
     .run()
