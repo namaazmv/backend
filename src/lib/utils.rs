@@ -1,6 +1,4 @@
-use chrono::{DateTime, Datelike, Local, TimeZone, Timelike};
-
-#[allow(deprecated)]
+use chrono::{DateTime, Datelike, FixedOffset, Local, TimeZone, Timelike, Utc};
 
 pub fn convert_timestamp_to_date(timestamp: i64) -> Result<DateTime<Local>, String> {
     let now = Local::now();
@@ -29,6 +27,15 @@ pub fn days_into_year(date: chrono::DateTime<Local>) -> u32 {
         .unwrap();
 
     (date.signed_duration_since(start_of_year).num_days() as u32 % 366) + 1
+}
+
+fn convert_js_timestamp_to_date(timestamp: i64) -> DateTime<Local> {
+    DateTime::<Utc>::from_utc(
+        chrono::NaiveDateTime::from_timestamp_opt(timestamp / 1000, 0).unwrap(),
+        Utc,
+    )
+    .with_timezone(&FixedOffset::east_opt(5 * 3600).unwrap())
+    .with_timezone(&Local)
 }
 
 // pub fn convert_timestamp_to_string(timestamp: i32) -> String {
